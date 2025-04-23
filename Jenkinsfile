@@ -22,6 +22,7 @@ pipeline {
                     sh "docker login -u $USERNAME -p $PASSWORD"
                     sh "docker image tag flask-app $USERNAME/flask-app:latest"
                     sh "docker push $USERNAME/flask-app:latest"
+                    echo "Image has been pushed to docker hub"
                 }
             }
         }
