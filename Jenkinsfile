@@ -1,10 +1,13 @@
+
 @Library("shared") _
 pipeline {
     agent { label 'dev' }
     stages {
         stage("Clone") {
-            script{
-                clone("https://github.com/ChandrachoodBoggaram/two-tier-flask-app.git","main")
+            steps{
+                script{
+                    clone("https://github.com/ChandrachoodBoggaram/two-tier-flask-app.git","main")
+                }
             }
             // steps {
             //     git url: "https://github.com/ChandrachoodBoggaram/two-tier-flask-app.git", branch: "main"
