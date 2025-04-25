@@ -12,6 +12,11 @@ pipeline {
                 sh "docker build -t flask-app ."
             }
         }
+        stage("Trivy Scan"){
+            steps{
+                sh "trivy image flask-app:latest"
+            }
+        }
         stage("Push") {
             steps {
                 withCredentials([usernamePassword(
