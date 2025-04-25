@@ -14,7 +14,8 @@ pipeline {
         }
         stage("Trivy Scan"){
             steps{
-                sh "trivy image flask-app:latest"
+                sh "trivy image flask-app:latest --severity CRITICAL,HIGH --format json --output trivy_report.json"
+
             }
         }
         stage("Push") {
