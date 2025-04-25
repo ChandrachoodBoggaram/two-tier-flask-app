@@ -34,6 +34,21 @@ pipeline {
     }
     
     post {
+        success {
+            emailext (
+                subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                body: "Good news!\n\nJob '${env.JOB_NAME} [${env.BUILD_NUMBER}]' completed successfully.\nCheck console: ${env.BUILD_URL}",
+                to: "chandrachoodboggaram@gmail.com"
+            )
+        }
+
+        failure {
+            emailext (
+                subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                body: "Oops!\n\nJob '${env.JOB_NAME} [${env.BUILD_NUMBER}]' has failed.\nCheck details here: ${env.BUILD_URL}",
+                to: "chandrachoodboggaram@gmail.com"
+            )
+        }
         always {
             cleanWs(cleanWhenNotBuilt: false,
                     deleteDirs: true,
@@ -42,5 +57,6 @@ pipeline {
                     patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
                                [pattern: '.propsfile', type: 'EXCLUDE']])
         }
+        
     }
 }
